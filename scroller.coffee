@@ -31,6 +31,10 @@ class Scroller
     @img.eq(1).show().css @style.low
     @bindClick()
 
+    # initial event calling
+    @opt.scrollTo 0
+    @img.eq(0).trigger 'active'
+
   down: ->
     return false if @active is @img.length - 1
     @adjustZ

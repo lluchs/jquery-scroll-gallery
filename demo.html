@@ -15,4 +15,6 @@
 <script src="scroller.js"></script>
 <script>
 	scr = $('div').scroller({width: 800, height: 532, scrollTo: function(i){console.log(i)}});
+	$('img').eq(1).on('active', function(){console.log('active')});
+	$('img').eq(1).on('inactive', function(){console.log('inactive')});
 </script>

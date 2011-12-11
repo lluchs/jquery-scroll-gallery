@@ -17,6 +17,7 @@ Usage
 
 ```javascript
 var scr = $('#scroller').scroller({
+  default: 0,              // initial image
   width: 100,              // dimensions of the active image
   height: 50,              // default: dimensions of the first image
   smaller: 0.8,            // factor for calculating dimensions of the other two visible images

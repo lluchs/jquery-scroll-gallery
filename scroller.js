@@ -3,33 +3,33 @@
   var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
   Scroller = (function() {
     function Scroller(e, opt) {
-      var hgt, padding, wdt, _base, _base2, _base3, _base4, _base5, _base6, _base7, _ref, _ref2, _ref3, _ref4, _ref5, _ref6, _ref7, _ref8;
+      var hgt, padding, wdt, _base, _base2, _base3, _base4, _base5, _base6, _base7, _ref, _ref2, _ref3, _ref4, _ref5, _ref6, _ref7, _ref8, _ref9;
       this.e = e;
       this.opt = opt;
       this.img = this.e.children('img');
-      this.active = 0;
-      if ((_ref = this.opt) == null) {
+      this.active = (_ref = this.opt["default"]) != null ? _ref : 0;
+      if ((_ref2 = this.opt) == null) {
         this.opt = {};
       }
-      if ((_ref2 = (_base = this.opt).width) == null) {
+      if ((_ref3 = (_base = this.opt).width) == null) {
         _base.width = this.img.width();
       }
-      if ((_ref3 = (_base2 = this.opt).height) == null) {
+      if ((_ref4 = (_base2 = this.opt).height) == null) {
         _base2.height = this.img.height();
       }
-      if ((_ref4 = (_base3 = this.opt).smaller) == null) {
+      if ((_ref5 = (_base3 = this.opt).smaller) == null) {
         _base3.smaller = 0.8;
       }
-      if ((_ref5 = (_base4 = this.opt).opacity) == null) {
+      if ((_ref6 = (_base4 = this.opt).opacity) == null) {
         _base4.opacity = 0.5;
       }
-      if ((_ref6 = (_base5 = this.opt).duration) == null) {
+      if ((_ref7 = (_base5 = this.opt).duration) == null) {
         _base5.duration = 600;
       }
-      if ((_ref7 = (_base6 = this.opt).easing) == null) {
+      if ((_ref8 = (_base6 = this.opt).easing) == null) {
         _base6.easing = 'swing';
       }
-      if ((_ref8 = (_base7 = this.opt).scrollTo) == null) {
+      if ((_ref9 = (_base7 = this.opt).scrollTo) == null) {
         _base7.scrollTo = function() {};
       }
       padding = this.opt.width * (1 - this.opt.smaller) / 2;
@@ -85,8 +85,9 @@
       this.img.hide().css({
         position: 'absolute'
       });
-      this.img.eq(0).show().css(this.style.mid);
-      this.img.eq(1).show().css(this.style.low);
+      this.getImg(this.active - 1).show().css(this.style.up);
+      this.getImg(this.active).show().css(this.style.mid);
+      this.getImg(this.active + 1).show().css(this.style.low);
       this.bindClick();
       this.opt.scrollTo(0);
       this.img.eq(0).trigger('active');

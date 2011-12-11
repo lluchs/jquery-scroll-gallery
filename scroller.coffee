@@ -3,7 +3,7 @@
 class Scroller
   constructor: (@e, @opt) ->
     @img = @e.children 'img'
-    @active = 0
+    @active = @opt.default ? 0
     # set standard options
     @opt ?= {}
     @opt.width ?= @img.width()
@@ -27,8 +27,9 @@ class Scroller
     @e.css position: 'relative', width: @opt.width, height: @opt.height * 2
     @img.hide().css position: 'absolute'
 
-    @img.eq(0).show().css @style.mid
-    @img.eq(1).show().css @style.low
+    @getImg(@active - 1).show().css @style.up
+    @getImg(@active).show().css @style.mid
+    @getImg(@active + 1).show().css @style.low
     @bindClick()
 
     # initial event calling

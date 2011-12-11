@@ -34,7 +34,7 @@ class Scroller
   down: ->
     return false if @active is @img.length - 1
     @adjustZ
-      upper : @getImg(@active - 1).animate @style.upper, @opt.duration, @opt.easing, -> $(@).hide()
+      upper : @getImg(@active - 1).animate(@style.upper, @opt.duration, @opt.easing, -> $(@).hide())
       up    : @getImg(@active).animate @style.up, @opt.duration, @opt.easing
       mid   : @getImg(@active + 1).animate @style.mid, @opt.duration, @opt.easing
       low   : @getImg(@active + 2).css(@style.lower).show().animate @style.low, @opt.duration, @opt.easing
@@ -49,7 +49,7 @@ class Scroller
       up    : @getImg(@active - 2).css(@style.upper).show().animate @style.up, @opt.duration, @opt.easing
       mid   : @getImg(@active - 1).animate @style.mid, @opt.duration, @opt.easing
       low   : @getImg(@active).animate @style.low, @opt.duration, @opt.easing
-      lower : @getImg(@active + 1).animate @style.lower, @opt.duration, @opt.easing, -> $(@).hide()
+      lower : @getImg(@active + 1).animate(@style.lower, @opt.duration, @opt.easing, -> $(@).hide())
     @active--
     @opt.scrollTo @active
     setTimeout (=> @bindClick()), @opt.duration

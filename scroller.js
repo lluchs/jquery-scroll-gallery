@@ -94,10 +94,9 @@
         return false;
       }
       this.adjustZ({
-        upper: this.getImg(this.active - 1).animate(this.style.upper, this.opt.duration, this.opt.easing)
-      }, function() {
-        return $(this).hide();
-      }, {
+        upper: this.getImg(this.active - 1).animate(this.style.upper, this.opt.duration, this.opt.easing, function() {
+          return $(this).hide();
+        }),
         up: this.getImg(this.active).animate(this.style.up, this.opt.duration, this.opt.easing),
         mid: this.getImg(this.active + 1).animate(this.style.mid, this.opt.duration, this.opt.easing),
         low: this.getImg(this.active + 2).css(this.style.lower).show().animate(this.style.low, this.opt.duration, this.opt.easing)
@@ -117,9 +116,9 @@
         up: this.getImg(this.active - 2).css(this.style.upper).show().animate(this.style.up, this.opt.duration, this.opt.easing),
         mid: this.getImg(this.active - 1).animate(this.style.mid, this.opt.duration, this.opt.easing),
         low: this.getImg(this.active).animate(this.style.low, this.opt.duration, this.opt.easing),
-        lower: this.getImg(this.active + 1).animate(this.style.lower, this.opt.duration, this.opt.easing)
-      }, function() {
-        return $(this).hide();
+        lower: this.getImg(this.active + 1).animate(this.style.lower, this.opt.duration, this.opt.easing, function() {
+          return $(this).hide();
+        })
       });
       this.active--;
       this.opt.scrollTo(this.active);

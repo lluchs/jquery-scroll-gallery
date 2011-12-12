@@ -33,8 +33,8 @@ class Scroller
     @bindClick()
 
     # initial event calling
-    @opt.scrollTo 0
-    @img.eq(0).trigger 'active'
+    @opt.scrollTo @active
+    @img.eq(@active).trigger 'active'
 
   down: ->
     return false if @active is @img.length - 1

@@ -89,8 +89,8 @@
       this.getImg(this.active).show().css(this.style.mid);
       this.getImg(this.active + 1).show().css(this.style.low);
       this.bindClick();
-      this.opt.scrollTo(0);
-      this.img.eq(0).trigger('active');
+      this.opt.scrollTo(this.active);
+      this.img.eq(this.active).trigger('active');
     }
     Scroller.prototype.down = function() {
       if (this.active === this.img.length - 1) {

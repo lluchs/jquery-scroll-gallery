@@ -30,7 +30,9 @@ class Scroller
     @getImg(@active - 1).show().css @style.up
     @getImg(@active).show().css @style.mid
     @getImg(@active + 1).show().css @style.low
-    @bindClick()
+
+    # bind click handler
+    @e.on 'click', (e) => @clickHandler e
 
     # initial event calling
     @opt.scrollTo @active
@@ -45,7 +47,6 @@ class Scroller
       low   : @getImg(@active + 2).css(@style.lower).show().animate @style.low, @opt.duration, @opt.easing
     @active++
     @opt.scrollTo @active
-    setTimeout (=> @bindClick()), @opt.duration
     true
 
   up: ->
@@ -57,7 +58,6 @@ class Scroller
       lower : @getImg(@active + 1).animate(@style.lower, @opt.duration, @opt.easing, -> $(@).hide())
     @active--
     @opt.scrollTo @active
-    setTimeout (=> @bindClick()), @opt.duration
     true
 
   getImg: (n) ->
@@ -72,11 +72,13 @@ class Scroller
       return
     , @opt.duration / 2
 
-  bindClick: ->
-    @img.unbind 'click'
-    @getImg(@active - 1).click => @up()
-    @getImg(@active + 1).click => @down()
-    true
+  clickHandler: (event) ->
+    # relative position
+    y = event.pageY - event.delegateTarget.offsetTop
+    if y < @opt.height
+      @up()
+    else
+      @down()
 
 jQuery.fn.scroller = (opt) ->
   new Scroller this, opt

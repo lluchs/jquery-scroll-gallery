@@ -88,7 +88,9 @@
       this.getImg(this.active - 1).show().css(this.style.up);
       this.getImg(this.active).show().css(this.style.mid);
       this.getImg(this.active + 1).show().css(this.style.low);
-      this.bindClick();
+      this.e.on('click', __bind(function(e) {
+        return this.clickHandler(e);
+      }, this));
       this.opt.scrollTo(this.active);
       this.img.eq(this.active).trigger('active');
     }
@@ -106,9 +108,6 @@
       });
       this.active++;
       this.opt.scrollTo(this.active);
-      setTimeout((__bind(function() {
-        return this.bindClick();
-      }, this)), this.opt.duration);
       return true;
     };
     Scroller.prototype.up = function() {
@@ -125,9 +124,6 @@
       });
       this.active--;
       this.opt.scrollTo(this.active);
-      setTimeout((__bind(function() {
-        return this.bindClick();
-      }, this)), this.opt.duration);
       return true;
     };
     Scroller.prototype.getImg = function(n) {
@@ -151,15 +147,14 @@
         }
       }, this), this.opt.duration / 2);
     };
-    Scroller.prototype.bindClick = function() {
-      this.img.unbind('click');
-      this.getImg(this.active - 1).click(__bind(function() {
+    Scroller.prototype.clickHandler = function(event) {
+      var y;
+      y = event.pageY - event.delegateTarget.offsetTop;
+      if (y < this.opt.height) {
         return this.up();
-      }, this));
-      this.getImg(this.active + 1).click(__bind(function() {
+      } else {
         return this.down();
-      }, this));
-      return true;
+      }
     };
     return Scroller;
   })();
